@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styles from "./app.module.css";
-import Input from "./component/input";
+import Input from "./component/Input";
 import ButtonCmp from "./component/buttonCmp";
-import Listing from "./component/listing";
+import Listing from "./component/listing.module.css";
 
 const App = () => {
   let [todoValue, setTodoValue] = useState("");
