@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./listing.module.css";
 import ButtonCmp from "./buttonCmp";
-import Input from "./input";
+import Input from "./Input";
 function Listing({ todos, setTodos }) {
   if (todos.length === 0) {
     return null;
