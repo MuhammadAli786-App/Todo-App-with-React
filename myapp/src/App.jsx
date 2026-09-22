@@ -5,39 +5,56 @@ import ButtonCmp from "./component/buttonCmp";
 import Listing from "./component/Listing";
 
 const App = () => {
-  let [todoValue, setTodoValue] = useState("");
-  let [todos, setTodos] = useState([]);
+  const [todoValue, setTodoValue] = useState("");
+  const [todos, setTodos] = useState([]);
+
   const addTodo = () => {
-    console.log(todoValue);
-    if (todoValue.length < 3) {
+    if (todoValue.trim().length < 3) {
       alert("Invalid Input Value");
       return;
     }
-    todos.unshift(todoValue);
-    setTodos([...todos]);
+
+    const newTodo = todoValue.trim();
+    setTodos((currentTodos) => [newTodo, ...currentTodos]);
     setTodoValue("");
-    console.log(todos);
   };
 
   const deleteAll = () => {
     setTodos([]);
   };
 
-
   return (
-    <div className={styles.container}>
-      <h1>Todo App</h1>
-      <Input
-        placeholder="Enter Todos..."
-        onChange={(e) => setTodoValue(e.target.value)}
-        value={todoValue}
-      />
-      <ButtonCmp text="Add" onClick={addTodo} />
-      <ButtonCmp text="Delete All"   style={{
-    background: "linear-gradient(135deg, #dc3545, #c82333)", 
-  }} onClick={deleteAll} />
-      <Listing todos={todos} setTodos={setTodos} />
-    </div>
+    <main className={styles.page}>
+      <section className={styles.container}>
+        <header className={styles.header}>
+          <p className={styles.kicker}>Productivity</p>
+          <h1>Todo App</h1>
+          <p className={styles.subtitle}>Stay organized. Get things done.</p>
+        </header>
+
+        <div className={styles.actions}>
+          <div className={styles.inputRow}>
+            <Input
+              aria-label="Enter a new task"
+              placeholder="Enter a new task..."
+              onChange={(e) => setTodoValue(e.target.value)}
+              value={todoValue}
+            />
+            <ButtonCmp text="Add Task" onClick={addTodo} variant="primary" />
+          </div>
+
+          <div className={styles.secondaryRow}>
+            <ButtonCmp
+              text="Delete All"
+              onClick={deleteAll}
+              variant="dangerSecondary"
+            />
+          </div>
+        </div>
+
+        <Listing todos={todos} setTodos={setTodos} />
+      </section>
+    </main>
   );
 };
 

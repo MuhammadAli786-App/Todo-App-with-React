@@ -2,79 +2,94 @@ import React, { useState } from "react";
 import styles from "./listing.module.css";
 import ButtonCmp from "./buttonCmp";
 import Input from "./Input";
+
 function Listing({ todos, setTodos }) {
+  const [editIndexNumber, setEditIndexNumber] = useState(null);
+  const [editValue, setEditValue] = useState("");
+
   if (todos.length === 0) {
-    return null;
+    return (
+      <div className={styles.emptyState} role="status" aria-live="polite">
+        <p>No tasks yet</p>
+        <span>Add your first task above to get started.</span>
+      </div>
+    );
   }
-  let [editIndexNumber, setEditIndexNumber] = useState(null);
-  let [editValue, setEditValue] = useState();
+
   const deleteTodo = (indexNumber) => {
-    console.log("deleteTodo", indexNumber, setTodos);
-    todos.splice(indexNumber, 1);
-    setTodos([...todos]);
+    const updatedTodos = todos.filter((_, index) => index !== indexNumber);
+    setTodos(updatedTodos);
+
+    if (editIndexNumber === indexNumber) {
+      setEditIndexNumber(null);
+      setEditValue("");
+    }
   };
 
   const editTodo = (indexNumber) => {
-    console.log("editTodo", indexNumber);
     setEditIndexNumber(indexNumber);
     setEditValue(todos[indexNumber]);
   };
 
   const saveHandler = (indexNumber) => {
-    console.log(editValue, indexNumber);
-    if (editValue.length < 3) {
+    if (editValue.trim().length < 3) {
       alert("Invalid Todo");
       return;
     }
-    todos.splice(indexNumber, 1, editValue);
-    setTodos([...todos]);
+
+    const updatedTodos = [...todos];
+    updatedTodos[indexNumber] = editValue.trim();
+    setTodos(updatedTodos);
     setEditIndexNumber(null);
     setEditValue("");
   };
 
-  console.log(todos);
   const cancel = () => {
     setEditIndexNumber(null);
     setEditValue("");
   };
+
   return (
-    <div className={styles.container}>
-      <ul>
+    <section className={styles.listSection}>
+      <div className={styles.listHeader}>
+        <span>{todos.length === 1 ? "1 task" : `${todos.length} tasks`}</span>
+      </div>
+
+      <ul className={styles.list}>
         {todos.map((value, index) => {
           return editIndexNumber === index ? (
-            <div className={styles.Inpcontainer} key={index}>
-              <Input
-                placeholder="Enter Edit Value"
-                onChange={(e) => setEditValue(e.target.value)}
-                value={editValue}
-              />
-              <ButtonCmp text="Save" onClick={() => saveHandler(index)} />
-              <ButtonCmp
-                text="Cancel"
-                style={{
-                  background: "linear-gradient(135deg, #dc3545, #c82333)",
-                }}
-                onClick={cancel}
-              />
-            </div>
+            <li key={`edit-${index}`} className={styles.editItem}>
+              <div className={styles.editRow}>
+                <Input
+                  aria-label="Edit task"
+                  placeholder="Enter Edit Value"
+                  onChange={(e) => setEditValue(e.target.value)}
+                  value={editValue}
+                />
+              </div>
+
+              <div className={styles.editActions}>
+                <ButtonCmp text="Save" onClick={() => saveHandler(index)} variant="primary" />
+                <ButtonCmp text="Cancel" onClick={cancel} variant="dangerSecondary" />
+              </div>
+            </li>
           ) : (
-            <li key={index}>
-              {value}{" "}
-              <div>
-                <ButtonCmp text="Edit" onClick={() => editTodo(index)} />
+            <li key={`todo-${index}`} className={styles.todoItem}>
+              <span className={styles.todoText}>{value}</span>
+
+              <div className={styles.todoActions}>
+                <ButtonCmp text="Edit" onClick={() => editTodo(index)} variant="secondary" />
                 <ButtonCmp
                   text="Delete"
-                  style={{
-                    background: "linear-gradient(135deg, #dc3545, #c82333)",
-                  }}
                   onClick={() => deleteTodo(index)}
+                  variant="danger"
                 />
               </div>
             </li>
           );
         })}
       </ul>
-    </div>
+    </section>
   );
 }
 

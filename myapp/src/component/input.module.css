@@ -1,51 +1,27 @@
-
-
 .inputField {
   width: 100%;
+  min-height: 48px;
   padding: 12px 14px;
-  font-size: 16px;
-  margin: 12px 0;
-  border-radius: 8px;
-  background: #f8f9fa; 
-  color: #282222;
-  outline: none;
-  border: 2px solid transparent;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--input-bg);
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.4;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-
+.inputField::placeholder {
+  color: var(--muted);
+}
 
 .inputField:hover {
-  background: #eef0f2;
+  border-color: #cbd5e1;
 }
-
 
 .inputField:focus {
-  border: 2px solid #007bff; 
-  background: #fff;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-
-@media screen and (max-width:550px) and (min-width:425px) {
-
-  .inputField{
-    margin: 10px 0;
-  padding: 10px 12px;
-
-  }
-
-}
-
-
-
-
-@media screen and (max-width:424px) and (min-width:300px) {
-
-    .inputField{
-    margin: 8px 0;
-  padding: 8px 10px;
-
-  }
+  outline: none;
+  border-color: var(--primary);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }

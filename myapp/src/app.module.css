@@ -1,41 +1,85 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 16px 40px;
+}
+
 .container {
-    background-color: #fff;
-    width: 75%;
-    margin: 50px auto;
-    padding: 10px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  width: min(100%, 760px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-soft);
+  padding: 24px 18px 18px;
 }
 
-.container h1 {
-    text-align: center;
-    font-size: 40px;
-    padding: 8px 2px;
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 20px;
 }
 
-
-@media screen and (max-width:550px) and (min-width:425px) {
-    .container{
-        width: 80%;
-        margin: 35px auto;
-        padding: 8px;
-    }
-    .container{
-        font-size: 34px;
-        padding: 6px 2px;
-    }
+.kicker {
+  color: var(--primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
+.header h1 {
+  font-size: clamp(2rem, 5vw, 2.7rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
 
+.subtitle {
+  color: var(--muted);
+  font-size: 0.98rem;
+}
 
-@media screen and (max-width:424px) and (min-width:300px) {
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
 
-        .container{
-        width: 85%;
-        margin: 25px auto;
-        padding: 6px;
-    }
-    .container{
-        font-size: 30px;
-        padding: 4px 2px;
-    }
+.inputRow {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.secondaryRow {
+  display: flex;
+  justify-content: flex-start;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 30px 28px 24px;
+  }
+
+  .inputRow {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .inputRow > :first-child {
+    flex: 1;
+  }
+
+  .secondaryRow {
+    justify-content: flex-end;
+  }
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding-top: 40px;
+  }
 }

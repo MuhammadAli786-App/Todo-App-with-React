@@ -1,58 +1,113 @@
- .Inpcontainer {
-     display: flex;
- }
+.listSection {
+  margin-top: 20px;
+}
 
- .container ul {
-     list-style-type: none;
-     font-size: 18px;
-     padding: 0;
-     margin: 0; 
- }
+.listHeader {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
 
- .container ul li {
-     padding: 14px 18px;
-     background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-     margin: 12px 0;
-     display: flex;
-     justify-content: space-between;
-     font-weight: 500;
-     align-items: center;
-     color: #0c0cde;
-     border-radius: 10px;
-     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
-     transition: all 0.3s ease;
- }
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
+.todoItem,
+.editItem {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #f8fafc;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
 
- .container ul li:hover {
-     background: linear-gradient(135deg, #e2e6ea, #dee2e6);
-     transform: translateY(-2px);
-     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
- }
+.todoItem:hover,
+.editItem:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+}
 
+.todoText {
+  min-width: 0;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
 
+.todoActions,
+.editActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
 
+.editRow {
+  width: 100%;
+}
 
+.emptyState {
+  margin-top: 18px;
+  padding: 22px 16px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 16px;
+  background: #f8fafc;
+  text-align: center;
+}
 
- @media screen and (max-width:550px) and (min-width:425px) {
+.emptyState p {
+  color: var(--text);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
 
-    .container ul{
-        font-size: 17px;
-    }
-     .container ul li {
-     padding: 11px 14px;
-     margin: 10px 0;
-    }
- }
+.emptyState span {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
 
+@media (min-width: 640px) {
+  .todoItem,
+  .editItem {
+    padding: 16px 18px;
+  }
 
-  @media screen and (max-width:424px) and (min-width:300px) {
+  .todoItem {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
 
-    .container ul{
-        font-size: 16px;
-    }
-     .container ul li {
-     padding: 8px 10px;
-     margin: 8px 0;
-    }
- }
+  .todoText {
+    flex: 1;
+  }
+
+  .todoActions {
+    flex-shrink: 0;
+  }
+
+  .editItem {
+    align-items: stretch;
+  }
+
+  .editActions {
+    justify-content: flex-end;
+  }
+}
